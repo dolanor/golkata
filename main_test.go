@@ -55,6 +55,15 @@ func TestGameOfLife(t *testing.T) {
 				".*.",
 			},
 		},
+
+		"4 living cells  with 2 neighbours=> 2 dead cells and 2 living cells": {
+			in: []string{
+				"****",
+			},
+			exp: []string{
+				".**.",
+			},
+		},
 	}
 
 	for name, c := range cases {

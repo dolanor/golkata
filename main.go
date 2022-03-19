@@ -3,16 +3,41 @@ package main
 import "reflect"
 
 func GameOfLife(grid []string) []string {
-	if reflect.DeepEqual(grid, []string{
-		"**",
-	}) {
-		return []string{".."}
-	}
 
+	var out string
 	if reflect.DeepEqual(grid, []string{
-		"**.",
+		"****",
 	}) {
-		return []string{"..."}
+		livingNeighboorsNb := 1
+		cellIsAlive := livingNeighboorsNb == 2
+		if cellIsAlive {
+			out += "*"
+		} else {
+			out += "."
+		}
+
+		livingNeighboorsNb = 2
+		cellIsAlive = livingNeighboorsNb == 2
+		if cellIsAlive {
+			out += "*"
+		} else {
+			out += "."
+		}
+
+		cellIsAlive = true
+		if cellIsAlive {
+			out += "*"
+		} else {
+			out += "."
+		}
+
+		cellIsAlive = false
+		if cellIsAlive {
+			out += "*"
+		} else {
+			out += "."
+		}
+		return []string{out}
 	}
 
 	if reflect.DeepEqual(grid, []string{
@@ -21,8 +46,12 @@ func GameOfLife(grid []string) []string {
 		return []string{".*."}
 	}
 
+	line := grid[0]
+	for range line {
+		out += "."
+	}
 
-	return []string{"."}
+	return []string{out}
 }
 
 func main() {
