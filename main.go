@@ -24,14 +24,16 @@ func GameOfLife(grid []string) []string {
 			out += "."
 		}
 
-		cellIsAlive = true
+		livingNeighboorsNb = 2
+		cellIsAlive = livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
 			out += "."
 		}
 
-		cellIsAlive = false
+		livingNeighboorsNb = 1
+		cellIsAlive = livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
