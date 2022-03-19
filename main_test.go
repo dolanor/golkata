@@ -11,7 +11,7 @@ func TestGameOfLife(t *testing.T) {
 		in  []string
 		exp []string
 	}{
-		"1 dead => 1 dead": {
+		"dead cell with 0 neighbour => 1 dead cell": {
 			in: []string{
 				".",
 			},
@@ -20,7 +20,7 @@ func TestGameOfLife(t *testing.T) {
 			},
 		},
 
-		"1 alive => 1 dead": {
+		"1 cell alive with 0 neighbour => 1 dead cell": {
 			in: []string{
 				"*",
 			},
@@ -29,7 +29,7 @@ func TestGameOfLife(t *testing.T) {
 			},
 		},
 
-		"2 alive => dead": {
+		"1 living cell with 1 neighbour => 2 dead cells": {
 			in: []string{
 				"**",
 			},
@@ -38,7 +38,7 @@ func TestGameOfLife(t *testing.T) {
 			},
 		},
 
-		"2 alive - => dead": {
+		"2 living cells with only 1 neighbour => all 3 dead cells": {
 			in: []string{
 				"**.",
 			},
@@ -47,16 +47,16 @@ func TestGameOfLife(t *testing.T) {
 			},
 		},
 
-		//		"2 alive / => dead": {
-		//			in: []string{
-		//				"*.",
-		//				".*",
-		//			},
-		//			exp: []string{
-		//				"..",
-		//				"..",
-		//			},
-		//		},
+		// "2 alive 0n 2x2 => dead": {
+		// 	in: []string{
+		// 		"*.",
+		// 		".*",
+		// 	},
+		// 	exp: []string{
+		// 		"..",
+		// 		"..",
+		// 	},
+		// },
 	}
 
 	for name, c := range cases {
