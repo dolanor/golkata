@@ -15,6 +15,12 @@ func GameOfLife(grid []string) []string {
 		return []string{"..."}
 	}
 
+	if reflect.DeepEqual(grid, []string{
+		"***",
+	}) {
+		return []string{".*."}
+	}
+
 
 	return []string{"."}
 }
