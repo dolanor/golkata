@@ -6,6 +6,17 @@ func isCellAlive(line string, x int) bool {
 	return line[x] == '*'
 }
 
+func countNeighbours(line string, idx int) int {
+	var livingNeighboorsNb int
+	if isCellAlive(line, idx-1) {
+		livingNeighboorsNb++
+	}
+	if isCellAlive(line, idx+1) {
+		livingNeighboorsNb++
+	}
+	return livingNeighboorsNb
+}
+
 func GameOfLife(grid []string) []string {
 
 	var out string
@@ -42,13 +53,9 @@ func GameOfLife(grid []string) []string {
 		}
 		livingNeighboorsNb = 0
 
-		if line[1] == '*' {
-			livingNeighboorsNb++
-		}
-		if line[3] == '*' {
-			livingNeighboorsNb++
-		}
-		cellIsAlive = livingNeighboorsNb == 2
+		idx := 2
+
+		cellIsAlive = countNeighbours(line, idx) == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
