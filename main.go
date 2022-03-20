@@ -1,7 +1,5 @@
 package main
 
-import "reflect"
-
 func isCellAlive(line string, x int) bool {
 	if x < 0 {
 		return false
@@ -35,26 +33,10 @@ func countNeighbours(line string, idx int) int {
 func GameOfLife(grid []string) []string {
 
 	var out string
-	if reflect.DeepEqual(grid, []string{
-		"****",
-	}) {
-		line := grid[0]
-
-		for i := 0; i < len(line); i++ {
-			out += genNextCell(line, i)
-		}
-		return []string{out}
-	}
-
-	if reflect.DeepEqual(grid, []string{
-		"***",
-	}) {
-		return []string{".*."}
-	}
 
 	line := grid[0]
-	for range line {
-		out += "."
+	for i := 0; i < len(line); i++ {
+		out += genNextCell(line, i)
 	}
 
 	return []string{out}
