@@ -2,37 +2,64 @@ package main
 
 import "reflect"
 
+func isCellAlive(line string, x int) bool {
+	return line[x] == '*'
+}
+
 func GameOfLife(grid []string) []string {
 
 	var out string
 	if reflect.DeepEqual(grid, []string{
 		"****",
 	}) {
-		livingNeighboorsNb := 1
+		line := grid[0]
+
+		var livingNeighboorsNb int
+		if line[1] == '*' {
+			livingNeighboorsNb++
+		}
+
 		cellIsAlive := livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
 			out += "."
 		}
+		livingNeighboorsNb = 0
 
-		livingNeighboorsNb = 2
+		if line[0] == '*' {
+			livingNeighboorsNb++
+		}
+		if line[2] == '*' {
+			livingNeighboorsNb++
+		}
+
 		cellIsAlive = livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
 			out += "."
 		}
+		livingNeighboorsNb = 0
 
-		livingNeighboorsNb = 2
+		if line[1] == '*' {
+			livingNeighboorsNb++
+		}
+		if line[3] == '*' {
+			livingNeighboorsNb++
+		}
 		cellIsAlive = livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
 		} else {
 			out += "."
 		}
+		livingNeighboorsNb = 0
 
-		livingNeighboorsNb = 1
+		if isCellAlive(line, 2) {
+			livingNeighboorsNb++
+		}
+
 		cellIsAlive = livingNeighboorsNb == 2
 		if cellIsAlive {
 			out += "*"
