@@ -3,7 +3,22 @@ package main
 import "reflect"
 
 func isCellAlive(line string, x int) bool {
+	if x < 0 {
+		return false
+	}
+	if x >= len(line) {
+		return false
+	}
 	return line[x] == '*'
+}
+
+func genNextCell(line string, idx int) string {
+	cellIsAlive := countNeighbours(line, idx) == 2
+	if cellIsAlive {
+		return "*"
+	} else {
+		return "."
+	}
 }
 
 func countNeighbours(line string, idx int) int {
@@ -25,53 +40,8 @@ func GameOfLife(grid []string) []string {
 	}) {
 		line := grid[0]
 
-		var livingNeighboorsNb int
-		if line[1] == '*' {
-			livingNeighboorsNb++
-		}
-
-		cellIsAlive := livingNeighboorsNb == 2
-		if cellIsAlive {
-			out += "*"
-		} else {
-			out += "."
-		}
-		livingNeighboorsNb = 0
-
-		if line[0] == '*' {
-			livingNeighboorsNb++
-		}
-		if line[2] == '*' {
-			livingNeighboorsNb++
-		}
-
-		cellIsAlive = livingNeighboorsNb == 2
-		if cellIsAlive {
-			out += "*"
-		} else {
-			out += "."
-		}
-		livingNeighboorsNb = 0
-
-		idx := 2
-
-		cellIsAlive = countNeighbours(line, idx) == 2
-		if cellIsAlive {
-			out += "*"
-		} else {
-			out += "."
-		}
-		livingNeighboorsNb = 0
-
-		if isCellAlive(line, 2) {
-			livingNeighboorsNb++
-		}
-
-		cellIsAlive = livingNeighboorsNb == 2
-		if cellIsAlive {
-			out += "*"
-		} else {
-			out += "."
+		for i := 0; i < len(line); i++ {
+			out += genNextCell(line, i)
 		}
 		return []string{out}
 	}
